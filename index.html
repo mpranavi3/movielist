@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Movie Booking Website</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+<img src="https://wadhwanifoundation.org/wp-content/uploads/2023/11/VIT-AP.png" alt="vitap logo" class="logo">
+<h1>🎬 MovieList</h1>
+</header>
+
+<h2>My Movie List</h2>
+
+<div class="search-container">
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for movies or genres..." title="Type in a name or genre">
+</div>
+
+<table id="myTable">
+  <tr class="header">
+    <th style="width:250px; text-align:left;">Name</th>
+    <th style="width:125px; text-align:left;">Genre</th>
+	<th style="width:150px;">Details</th>
+	<th style="width:50px;">Bookmark</th>
+  </tr>
+  <tr id="m101">
+    <td>Sinners</td>
+    <td>Horror</td>
+	<td style="text-align: center;">
+		<button class="details-btn" onclick="deets('m101')">🔽 Details</button>
+	</td>
+	<td style="text-align: center;">
+		<button class="bookmark-btn" onclick="bookmark('m101')">🔖</button>
+	</td>
+  </tr>
+  <tr id="m201">
+    <td>Look Back</td>
+    <td>Animation</td>
+	<td style="text-align: center;">
+		<button class="details-btn" onclick="deets('m201')">🔽 Details</button>
+	</td>
+	<td style="text-align: center;">
+		<button class="bookmark-btn" onclick="bookmark('m201')">🔖</button>
+	</td>
+  </tr>
+  <tr id="m301">
+    <td>Skyfall</td>
+    <td>Action</td>
+	<td style="text-align: center;">
+		<button class="details-btn" onclick="deets('m301')">🔽 Details</button>
+	</td>
+	<td style="text-align: center;">
+		<button class="bookmark-btn" onclick="bookmark('m301')">🔖</button>
+	</td>
+  </tr>
+  <tr id="m102">
+    <td>Iron Lung</td>
+    <td>Horror</td>
+	<td style="text-align: center;">
+		<button class="details-btn" onclick="deets('m102')">🔽 Details</button>
+	</td>
+	<td style="text-align: center;">
+		<button class="bookmark-btn" onclick="bookmark('m102')">🔖</button>
+	</td>
+  </tr>
+  <tr id="m302">
+    <td>Casino Royale</td>
+    <td>Action</td>
+	<td style="text-align: center;">
+		<button class="details-btn" onclick="deets('m302')">🔽 Details</button>
+	</td>
+	<td style="text-align: center;">
+		<button class="bookmark-btn" onclick="bookmark('m302')">🔖</button>
+	</td>
+  </tr>
+  <tr id="m103">
+    <td>Nosferatu</td>
+    <td>Horror</td>
+	<td style="text-align: center;">
+		<button class="details-btn" onclick="deets('m103')">🔽 Details</button>
+	</td>
+	<td style="text-align: center;">
+		<button class="bookmark-btn" onclick="bookmark('m103')">🔖</button>
+	</td>
+  </tr>
+  <tr id="m202">
+    <td>When Marnie Was There</td>
+    <td>Animation</td>
+	<td style="text-align: center;">
+		<button class="details-btn" onclick="deets('m202')">🔽 Details</button>
+	</td>
+	<td style="text-align: center;">
+		<button class="bookmark-btn" onclick="bookmark('m202')">🔖</button>
+	</td>
+  </tr>
+  <tr id="m303">
+    <td>No Time to Die</td>
+    <td>Action</td>
+	<td style="text-align: center;">
+		<button class="details-btn" onclick="deets('m303')">🔽 Details</button>
+	</td>
+	<td style="text-align: center;">
+		<button class="bookmark-btn" onclick="bookmark('m303')">🔖</button>
+	</td>
+  </tr>
+</table>
+
+<!-- Movie Details Modal -->
+<div id="movieModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2 id="modalMovieTitle"></h2>
+    <div class="movie-details">
+      <p><strong>Genre:</strong> <span id="mgenre"></span></p>
+      <p><strong>Description:</strong> <span id="mdesc"></span></p>
+      <p><strong>Runtime:</strong> <span id="mruntime"></span></p>
+      <p><strong>Rating:</strong> <span id="mrating" class="rating"></span></p>
+    </div>
+    <button class="book-now-btn" id="bookbtn">Save Your Seats!</button>
+  </div>
+</div>
+
+<!-- Booking Form Modal -->
+<div id="bookingModal" class="modal">
+  <div class="modal-content booking-form">
+    <span class="close" onclick="closeBookingModal()">&times;</span>
+    <h2 id="bookingMovieTitle">Book Tickets</h2>
+    <form id="bookingForm">
+      <input type="hidden" id="bookingMovieId" name="movieId">
+      
+      <div class="form-section">
+        <h3>Personal Details</h3>
+        <div class="form-group">
+          <label for="name">Full Name:</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="age">Age:</label>
+          <input type="number" id="age" name="age" min="1" max="120" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="gender">Gender:</label>
+          <select id="gender" name="gender" required>
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="form-section">
+        <h3>Payment Details</h3>
+        <div class="form-group">
+          <label for="cardName">Name on Card:</label>
+          <input type="text" id="cardName" name="cardName" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="cardNumber">Card Number:</label>
+          <input type="text" id="cardNumber" name="cardNumber" maxlength="16" placeholder="1234 5678 9012 3456" required>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group half">
+            <label for="expiry">Expiry Date:</label>
+            <input type="month" id="expiry" name="expiry" required>
+          </div>
+          
+          <div class="form-group half">
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" name="cvv" maxlength="3" placeholder="123" required>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-section">
+        <h3>Booking Details</h3>
+        <div id="bookingOptions"></div>
+        
+        <div class="form-group">
+          <label for="seats">Number of Seats:</label>
+          <input type="number" id="seats" name="seats" min="1" max="10" value="1" required>
+        </div>
+      </div>
+      
+      <div class="form-actions">
+        <button type="button" class="cancel-btn" onclick="closeBookingModal()">Cancel</button>
+        <button type="submit" class="submit-btn">Generate Ticket</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Ticket Modal -->
+<div id="ticketModal" class="modal">
+  <div class="modal-content ticket">
+    <span class="close" onclick="closeTicketModal()">&times;</span>
+    <div id="ticketContent"></div>
+  </div>
+</div>
+
+<footer>
+<img src="https://wadhwanifoundation.org/wp-content/uploads/2023/11/VIT-AP.png" alt="vitap logo" class="logo">
+<p>&copy; 2024 MovieList - Your Movie Booking Partner</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
